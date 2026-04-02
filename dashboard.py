@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -12,12 +6,12 @@ import re
 import traceback
 
 # ================= 1. 页面基本设置 =================
-st.set_page_config(page_title="南海农商银行-风险观测看板", layout="wide")
+st.set_page_config(page_title="NHNS-风险观测看板", layout="wide")
 
 # ================= 2. 智能读取与自动单位换算 =================
 @st.cache_data
 def load_and_clean_data():
-    file_path = "/Users/bow/Downloads/Python学习/南海农商银行-风险观测看板.xlsx"
+    file_path = "NHNS-风险观测看板.xlsx"
     
     try:
         df_macro = pd.read_excel(file_path, sheet_name="Macro_Trends")
@@ -90,7 +84,7 @@ if df is not None and not df.empty:
     st.markdown(f"""
     **📝 本月风控摘要 ({latest_month})：**
     * **大盘稳健**：整体资产余额稳步增长至 **{current_data['资产余额']:.2f} 亿**。
-    * **风险提示**：累计不良率目前为 **{current_data['累计不良率']*100:.2f}%**。**M0-M1早期指标目前为 {current_data['M0_M1结转率']*100:.2f}%**，请结合业务实际情况关注早期逾期抬头风险。
+    * **风险提示**：累计不良率目前为 **{current_data['累计不良率']*100:.2f}%**。**M0-M1早期指标目前为 {current_data['M0_M1结转率']*100:.2f}%**，需关注早期逾期抬头风险。
     """)
     st.divider()
     
@@ -165,4 +159,3 @@ if df is not None and not df.empty:
             "新增余额": "{:.2f}亿",
             "M0_M1结转率": "{:.2%}"
         }), use_container_width=True)
-
